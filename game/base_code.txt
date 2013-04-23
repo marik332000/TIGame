@@ -80,4 +80,11 @@ argx:=20
 argy:=20
 strid := "game over"
 args := strid
-drawstring
+argk:=0
+endloop:
+	drawstring
+	argk:= argk + 1
+	if argk=4 then
+		argk:=0
+	endif
+goto endloop
