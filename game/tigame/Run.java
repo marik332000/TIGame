@@ -43,6 +43,7 @@ public class Run {
 		while(true) {
 			frame.requestFocus();
 			s.step();
+			Thread.sleep(5);
 		}
 	}
 }

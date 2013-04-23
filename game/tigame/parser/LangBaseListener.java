@@ -12,11 +12,20 @@ public class LangBaseListener implements LangListener {
 	@Override public void enterAssign(LangParser.AssignContext ctx) { }
 	@Override public void exitAssign(LangParser.AssignContext ctx) { }
 
+	@Override public void enterNegate(LangParser.NegateContext ctx) { }
+	@Override public void exitNegate(LangParser.NegateContext ctx) { }
+
+	@Override public void enterOr(LangParser.OrContext ctx) { }
+	@Override public void exitOr(LangParser.OrContext ctx) { }
+
 	@Override public void enterInt(LangParser.IntContext ctx) { }
 	@Override public void exitInt(LangParser.IntContext ctx) { }
 
 	@Override public void enterGlobal(LangParser.GlobalContext ctx) { }
 	@Override public void exitGlobal(LangParser.GlobalContext ctx) { }
+
+	@Override public void enterCmp(LangParser.CmpContext ctx) { }
+	@Override public void exitCmp(LangParser.CmpContext ctx) { }
 
 	@Override public void enterArrayassign(LangParser.ArrayassignContext ctx) { }
 	@Override public void exitArrayassign(LangParser.ArrayassignContext ctx) { }
@@ -26,6 +35,12 @@ public class LangBaseListener implements LangListener {
 
 	@Override public void enterLabel(LangParser.LabelContext ctx) { }
 	@Override public void exitLabel(LangParser.LabelContext ctx) { }
+
+	@Override public void enterAnd(LangParser.AndContext ctx) { }
+	@Override public void exitAnd(LangParser.AndContext ctx) { }
+
+	@Override public void enterNot(LangParser.NotContext ctx) { }
+	@Override public void exitNot(LangParser.NotContext ctx) { }
 
 	@Override public void enterId(LangParser.IdContext ctx) { }
 	@Override public void exitId(LangParser.IdContext ctx) { }
@@ -41,6 +56,9 @@ public class LangBaseListener implements LangListener {
 
 	@Override public void enterIf(LangParser.IfContext ctx) { }
 	@Override public void exitIf(LangParser.IfContext ctx) { }
+
+	@Override public void enterString(LangParser.StringContext ctx) { }
+	@Override public void exitString(LangParser.StringContext ctx) { }
 
 	@Override public void enterParen(LangParser.ParenContext ctx) { }
 	@Override public void exitParen(LangParser.ParenContext ctx) { }

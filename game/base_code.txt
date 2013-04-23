@@ -1,61 +1,64 @@
 prgm main
-global argc
-global arg0
+global argc  
+global arg0 
 global arg1
 global argx
 global argy
 global argk
+global args
 global return
 
-argx := 96/2
-argy := 64/2
+; comments
 
+; start in middle 
+; of board
+argx := 96/2 ;
+argy := 64/2 ;
+
+; print initial pos
 argc := 2
 arg0 := argx
 arg1 := argy
 printerr
 
+;draw init pos
+setpixel
 
 noinput:
 	getkey
 	keycode := return
-	if keycode-87 then
-		if keycode-68 then
-			if keycode-83 then
-				if keycode-65 then
-					goto noinput
-				endif
-			endif
+	
+	if not keycode=0 then
+		arg0 := keycode
+		printerr
+		if keycode=87 or \
+		   keycode=65 or \
+		   keycode=68 or \
+		   keycode=83 then
+			goto start
 		endif
 	endif
-	goto start
+	goto noinput
 loop:
 	getkey
 	keycode := return
 start:
-	if keycode-87 then
-		if keycode-68 then
-			if keycode-83 then
-				if keycode-65 then
-					goto physics
-				endif
-				dy:=0
-				dx:=0-1
-				goto physics
-			endif
-			dy:=1
-			dx:=0
-			goto physics
-		endif
+	if keycode=87 then
+		dy:=-1
+		dx:=0
+	endif
+	if keycode=68 then
 		dy:=0
 		dx:=1
-		goto physics
 	endif
-	dy:=0-1
-	dx:=0
-	goto physics
-
-physics:
+	if keycode=83 then
+		dy:=1
+		dx:=0
+	endif
+	if keycode=65 then
+		dy:=0
+		dx:=-1
+	endif
 	argk := 2
 	setpixel
 	argy := argy + dy
@@ -63,15 +66,18 @@ physics:
 
 	getpixel
 	shaded := return
-	if shaded then
-		goto endgame
+	if not shaded then
+		argk := 1
+		setpixel
+		goto loop
 	endif
-	argk := 1
-	setpixel
-
-goto loop
 
 endgame:
-arg0 := 0-1
-arg1 := 0-1
+arg0 := -1
+arg1 := -1
 printerr
+argx:=20
+argy:=20
+strid := "game over"
+args := strid
+drawstring

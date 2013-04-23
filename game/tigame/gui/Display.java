@@ -37,11 +37,11 @@ public class Display implements IContext {
 			}
 			catch(Exception e) {
 				e.printStackTrace();
-				System.err.println("Runtime Error in Program\n");
+				System.err.println("Runtime Error in Program at "+prgm.getCounter()+"\n");
 				prgm = null;
 			}
 			catch(StackOverflowError e) {
-				System.err.println("Stack overflow\n");
+				System.err.println("Stack overflow at "+prgm.getCounter()+"\n");
 				prgm = null;
 			}
 		}

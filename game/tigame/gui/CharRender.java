@@ -22,7 +22,7 @@ public class CharRender {
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
-		text = "abcdefghijklmnopqrstuvwxyz0123456789:\",()<>[]{}+-/_?'^\\.>~= ";
+		text = "abcdefghijklmnopqrstuvwxyz0123456789:\",()<>[]{}+-/_?'^\\.;~=* ";
 		letters = new BufferedImage[font.getWidth()/(width+left_pad)];
 		for(int i=0; i<letters.length; i++) {
 			letters[i] = font.getSubimage(i*(width+left_pad)+left_pad, 0, width, height);

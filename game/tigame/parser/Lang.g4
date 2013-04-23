@@ -22,17 +22,26 @@ statement
 
 // make sure can support arrays eventually
 expr
-    :  expr op=('*'|'/'|'%') expr # muldivmod
-	|  expr op=('+'|'-') expr     # addsub
-	|  ID '[' expr ']'            # array
-	|  ID                         # id
-	|  INT                        # int
-	|  '(' expr ')'			      # paren
+    :  expr op=('*'|'/'|'%') expr 			# muldivmod
+	|  expr op=('+'|'-') expr     			# addsub
+	|  expr ('>='|'<='|'='|'>'|'<') expr 	# cmp
+	|  expr 'and'  expr 					# and
+	|  expr 'or'  expr						# or
+	|  'not' expr                 			# not
+	|  ID '[' expr ']'            			# array
+	|  ID                         			# id
+	|  INT                        			# int
+	|  '-' expr                   			# negate
+	|  '(' expr ')'			      			# paren
+	|  STR                                  # string
 	;
 
 
 ID : [a-zA-Z][a-zA-Z0-9]*;  // match id's
+STR: '"' (~["]|'\\"')* '"';
 INT: [0-9]+;
 BECOMES: ':=';
-NL: '\r'? '\n';
+HIDENL: '\\' ~[\r\n]* '\r'? '\n' -> channel(HIDDEN);
+NL:  '\r'? '\n';
+COMMENT: ';' (~[\r\n])* -> channel(HIDDEN);
 WS: [ \t\u000C]+ -> channel(HIDDEN);

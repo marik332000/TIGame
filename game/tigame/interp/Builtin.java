@@ -8,6 +8,7 @@ public class Builtin extends Program {
 		GetPixel.register();
 		SetPixel.register();
 		GetKey.register();
+		DrawString.register();
 	}
 
 	public static class PrintErr extends Builtin {
@@ -58,6 +59,31 @@ public class Builtin extends Program {
 			}
 			else {
 				screen.setPixel(x,y,2);
+			}
+			screen.draw();
+		}
+	}
+	public static class DrawString extends Builtin {
+		public static void register() {
+			Program.registerProgram("drawstring", new DrawString());
+		}
+		public void exec() {
+			//if(Display.display == null) return;
+			Screen screen = Display.display.getScreen();
+			setGlobal("args");
+			setGlobal("argx");
+			setGlobal("argy");
+			setGlobal("argk");
+			int x = getVariable("argx");
+			int y = getVariable("argy");
+			int s = getVariable("args");
+			String str = Program.getString(s);
+			if( isDefined("argk") ) {
+				int k = getVariable("argk");
+				screen.drawString(str,x,y,k);
+			}
+			else {
+				screen.drawString(str,x,y);
 			}
 			screen.draw();
 		}

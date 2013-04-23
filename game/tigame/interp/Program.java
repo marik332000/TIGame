@@ -9,6 +9,7 @@ import java.util.Set;
 public class Program extends Statement {
 	private static Map<String, Program> pcalls = new HashMap<String, Program>();
 	private static Map<String, Integer> global_vars = new HashMap<String, Integer>();
+	private static ArrayList<String> strs = new ArrayList<String>();
 	private Set<String> defined_global;
 	private ArrayList<Statement> statements;
 	private Map<String, Integer> vars;
@@ -49,7 +50,14 @@ public class Program extends Statement {
 			return null;//throw new RuntimeException(name+": no such program.");
 		}
 	}
-
+	public static int registerString(String str) {
+		strs.add(str);
+		return strs.size()-1;
+	}
+	public static String getString(int id) {
+		if( id <0 || id > strs.size() ) return null;
+		return strs.get(id);
+	}
 	private int pc;
 	public Program() {
 		done = false;

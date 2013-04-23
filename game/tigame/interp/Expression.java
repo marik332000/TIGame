@@ -36,6 +36,14 @@ public class Expression {
 			return -getOp().eval();
 		}
 	}
+	public static class Not extends UnaryExpression {
+		public Not(Expression op) {
+			super(op);
+		}
+		public int eval() {
+			return getOp().eval()==0? 1:0;
+		}
+	}
 	public static class Multiply extends BinaryExpression {
 		public Multiply(Expression op1, Expression op2) {
 			super(op1,op2);
@@ -60,12 +68,52 @@ public class Expression {
 			return getOp1().eval()+getOp2().eval();
 		}
 	}
+	public static class And extends BinaryExpression {
+		public And(Expression op1, Expression op2) {
+			super(op1, op2);
+		}
+		public int eval() {
+			return (getOp1().eval() !=0 && getOp2().eval() != 0)? 1:0;
+		}
+	}
+	public static class Or extends BinaryExpression {
+		public Or(Expression op1, Expression op2) {
+			super(op1, op2);
+		}
+		public int eval() {
+			return (getOp1().eval() !=0 || getOp2().eval() != 0)?1:0;
+		}
+	}
 	public static class Subtract extends BinaryExpression {
 		public Subtract(Expression op1, Expression op2) {
 			super(op1, op2);
 		}
 		public int eval() {
 			return getOp1().eval()-getOp2().eval();
+		}
+	}
+	public static class LessThan extends BinaryExpression {
+		public LessThan(Expression op1, Expression op2) {
+			super(op1, op2);
+		}
+		public int eval() {
+			return getOp1().eval() < getOp2().eval()? 1:0;
+		}
+	}
+	public static class GreaterThan extends BinaryExpression {
+		public GreaterThan(Expression op1, Expression op2) {
+			super(op1, op2);
+		}
+		public int eval() {
+			return getOp1().eval() > getOp2().eval()? 1:0;
+		}
+	}
+	public static class EqualTo extends BinaryExpression {
+		public EqualTo(Expression op1, Expression op2) {
+			super(op1, op2);
+		}
+		public int eval() {
+			return getOp1().eval() == getOp2().eval()?1:0;
 		}
 	}
 	public static class IntegerLiteral extends Expression {
@@ -88,6 +136,14 @@ public class Expression {
 		public int eval() {
 			return prgm.getVariable(name);
 		}
-
+	}
+	public static class StringLiteral extends Expression {
+		private int id;
+		public StringLiteral(String s) {
+			id = Program.registerString(s);
+		}
+		public int eval() {
+			return id;
+		}
 	}
 }

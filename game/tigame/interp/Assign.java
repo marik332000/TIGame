@@ -8,6 +8,7 @@ public class Assign extends Statement {
 		this.expr = expr;
 	}
 	public void exec() {
-		super.getProgram().setVariable(var_name, expr.eval());
+		Integer val = expr.eval();
+		super.getProgram().setVariable(var_name, val);
 	}
 }
