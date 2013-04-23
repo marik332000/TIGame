@@ -1,0 +1,77 @@
+prgm main
+global argc
+global arg0
+global arg1
+global argx
+global argy
+global argk
+global return
+
+argx := 96/2
+argy := 64/2
+
+argc := 2
+arg0 := argx
+arg1 := argy
+printerr
+
+
+noinput:
+	getkey
+	keycode := return
+	if keycode-87 then
+		if keycode-68 then
+			if keycode-83 then
+				if keycode-65 then
+					goto noinput
+				endif
+			endif
+		endif
+	endif
+	goto start
+loop:
+	getkey
+	keycode := return
+start:
+	if keycode-87 then
+		if keycode-68 then
+			if keycode-83 then
+				if keycode-65 then
+					goto physics
+				endif
+				dy:=0
+				dx:=0-1
+				goto physics
+			endif
+			dy:=1
+			dx:=0
+			goto physics
+		endif
+		dy:=0
+		dx:=1
+		goto physics
+	endif
+	dy:=0-1
+	dx:=0
+	goto physics
+
+physics:
+	argk := 2
+	setpixel
+	argy := argy + dy
+	argx := argx + dx
+
+	getpixel
+	shaded := return
+	if shaded then
+		goto endgame
+	endif
+	argk := 1
+	setpixel
+
+goto loop
+
+endgame:
+arg0 := 0-1
+arg1 := 0-1
+printerr
