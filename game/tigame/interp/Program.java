@@ -131,9 +131,7 @@ public class Program extends Statement {
 	}
 	public void exec() {
 		while(pc < statements.size() && !done) {
-			Statement stat = statements.get(pc);
-			stat.exec();
-			pc++;
+			step();
 		}
 	}
 }

@@ -1,9 +1,0 @@
-if, goto, assignment, expressions.
-int, string literal
-
-commmand[]:
-
-label -> sizeof(array) (index of next command)
-if -> on exit, note position, jump if false.
-
-pc - program counter.

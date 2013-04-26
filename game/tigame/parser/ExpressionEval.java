@@ -14,6 +14,13 @@ public class ExpressionEval extends LangBaseVisitor<Expression> implements LangV
 		this.prgm = prgm;
 	}
 	@Override
+	public Expression visitArray(LangParser.ArrayContext ctx) {
+		return new Expression.Array(
+				ctx.ID().getText(),
+				visit(ctx.expr()),
+				prgm);
+	}
+	@Override
 	public Expression visitInt(LangParser.IntContext ctx) {
 		return new Expression.IntegerLiteral(
 				Integer.valueOf(ctx.INT().getText())
@@ -66,7 +73,7 @@ public class ExpressionEval extends LangBaseVisitor<Expression> implements LangV
 
 	@Override
 	public Expression visitCmp(LangParser.CmpContext ctx) {
-		String op = ctx.getText().trim();
+		String op = ctx.op.getText().trim();
 		if( ">".equals(op)) {
 			return new Expression.GreaterThan(
 				visit(ctx.expr(0)),

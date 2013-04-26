@@ -10,7 +10,7 @@ import java.io.IOException;
 import tigame.interp.Program;
 
 public class ProgramParser {
-	public static Program parse(String code) {
+	public static void parse(String code) {
 		Program prgm = null;
 		try {
 			ANTLRInputStream input = new ANTLRInputStream(code);
@@ -18,17 +18,15 @@ public class ProgramParser {
 			LangLexer lexer = new LangLexer(input);
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			LangParser parser = new LangParser(tokens);
-			ParseTree tree = parser.program();
+			ParseTree tree = parser.file();
 
 			ParseTreeWalker walker = new ParseTreeWalker();
 			InterpreterGenerator extractor = new InterpreterGenerator();
 			walker.walk(extractor, tree);
-			prgm = extractor.getProgram();
 		}
 		catch( Exception e ) {
 			e.printStackTrace();
 		}
-		return prgm;
 	}
 }
 

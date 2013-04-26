@@ -137,6 +137,24 @@ public class Expression {
 			return prgm.getVariable(name);
 		}
 	}
+	public static class Array extends Expression {
+		private String name;
+		private Expression index;
+		private Program prgm;
+
+		public Array(String name, Expression index, Program prgm) {
+			this.name = name;
+			this.index = index;
+			this.prgm = prgm;
+		}
+		public int eval() {
+			String var_name = name+"["+index.eval()+"]";
+			if( prgm.isGlobal( name ) ) {
+				prgm.setGlobal( var_name );
+			}
+			return prgm.getVariable( var_name );
+		}
+	}
 	public static class StringLiteral extends Expression {
 		private int id;
 		public StringLiteral(String s) {
