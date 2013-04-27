@@ -56,6 +56,19 @@ public class Editor implements IContext {
 		}.start();
 	}
 	public void setText(String s) {
+		cols = 96/4-1;
+		rows = 1;
+		buffer = new char[max_rows+20][cols];
+		length = new int[max_rows+20];
+		row = 0;
+		col = 0;
+
+		viewbase = 0;
+
+		mode = INSERT;
+
+		shift = 0;
+
 		String lines[] = s.split("\n");
 		for(int i=0; i<lines.length; i++) {
 			String line = lines[i].trim();

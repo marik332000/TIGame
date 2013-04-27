@@ -26,6 +26,9 @@ public class Display implements IContext {
 		screen.fill(0);
 		screen.draw();
 		this.prgm = Program.getProgram(name);
+		if( prgm != null ) {
+			prgm.setCounter(0);
+		}
 	}
 	public Screen getScreen() {
 		return screen;

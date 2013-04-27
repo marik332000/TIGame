@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class Program extends Statement {
-	private static Map<String, Program> pcalls = new HashMap<String, Program>();
+	protected static Map<String, Program> pcalls = new HashMap<String, Program>();
 	private static Map<String, Integer> global_vars = new HashMap<String, Integer>();
 	private static ArrayList<String> strs = new ArrayList<String>();
 	private Set<String> defined_global;
@@ -16,7 +16,7 @@ public class Program extends Statement {
 	private Map<String, Label> labels;
 	private static int level = 0;
 	private static int max_level = 10000;
-	private static boolean done;
+	protected static boolean done;
 
 	public void haltAll() {
 		done = true;

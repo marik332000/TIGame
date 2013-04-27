@@ -69,6 +69,7 @@ public class Supervisor implements KeyListener {
 				break;
 			default:
 				keyCode = e.getKeyCode();
+				activeContext().keyPressed(keyCode);
 			//System.out.println(KeyEvent.getKeyText(keyCode));
 		}
 	}
@@ -83,7 +84,14 @@ public class Supervisor implements KeyListener {
 			case DISP:
 				ProgramParser.parse(editor.getText());
 				((CardLayout)container.getLayout()).show(container,GENERAL_DISP);
-				display.runProgram("main");
+				if(Program.getProgram("main") == null) {
+					//System.out.println("SelectProg");
+					//display.runProgram("selectprogwrapper");
+					display.runProgram("selectprog");
+				}
+				else {
+					display.runProgram("main");
+				}
 				break;
 			case EDITOR:
 				((CardLayout)container.getLayout()).show(container,EDITOR_DISP);
@@ -96,7 +104,7 @@ public class Supervisor implements KeyListener {
 	}
 	public void step() {
 		IContext context = activeContext();
-		context.keyPressed(keyCode);
+		//context.keyPressed(keyCode);
 		keyCode = 0;
 		context.step();
 		context.draw();

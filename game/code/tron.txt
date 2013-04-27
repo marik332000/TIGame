@@ -1,0 +1,52 @@
+prgm tron
+global argx
+global argy
+global argk
+global args
+global return
+
+; start in middle
+argx := 96/2
+argy := 64/2
+
+;draw init pos
+setpixel
+
+dx:=0
+dy:=0
+
+; init shade
+shaded := 0
+while not shaded do
+	getkey
+	key := return
+	if key=87 then
+		dy:=-1
+		dx:=0
+	else if key=68 then
+		dy:=0
+		dx:=1
+	else if key=83 then
+		dy:=1
+		dx:=0
+	else if key=65 then
+		dy:=0
+		dx:=-1
+	endif
+	if dx=0 and dy=0 then
+		continue
+	endif
+	argk := 2
+	setpixel
+	argy := argy + dy
+	argx := argx + dx
+	getpixel
+	shaded := return
+done
+argx := 20
+argy := 20
+args := "game over"
+argk := 3
+drawstring
+
+endprgm

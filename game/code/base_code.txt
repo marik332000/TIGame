@@ -1,0 +1,15 @@
+prgm test
+global return
+global arg0
+global argc
+argc := 1
+
+key := 0
+while not key=86 do
+	getkey
+	key := return
+	arg0 := key
+	printerr
+done
+
+endprgm

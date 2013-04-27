@@ -1,0 +1,87 @@
+prgm snake
+global argx
+global argy
+global argk
+global args
+global tx
+global ty
+global tlen
+global return
+
+; start in middle
+x := 96/2
+y := 64/2
+
+tlen := 15
+ii := 0
+while ii < tlen do
+	tx[ii] := x
+	ty[ii] := y
+	ii := ii + 1
+done
+
+argx := x
+argy := y
+;draw init pos
+setpixel
+
+dx:=0
+dy:=0
+
+; init shade
+shaded := 0
+while not shaded do
+	getkey
+	key := return
+	if key=87 then
+		dy:=-1
+		dx:=0
+	else if key=68 then
+		dy:=0
+		dx:=1
+	else if key=83 then
+		dy:=1
+		dx:=0
+	else if key=65 then
+		dy:=0
+		dx:=-1
+	endif
+	if dx=0 and dy=0 then
+		continue
+	endif
+	argx := tx[tlen-1]
+	argy := ty[tlen-1]
+	argk := 0
+	setpixel
+
+	
+	ii := tlen-2
+	while ii >= 0 do
+		tx[ii+1] := tx[ii]
+		ty[ii+1] := ty[ii]
+		ii := ii-1
+	done
+
+	ty[0] := ty[0]+ dy
+	tx[0] := tx[0]+ dx
+	argx := tx[0]
+	argy := ty[0]	
+	getpixel
+	shaded := return
+
+	ii := 0
+	while ii<tlen do
+		argx := tx[ii]
+		argy := ty[ii]
+		argk := 3
+		setpixel
+		ii := ii + 1
+	done
+done
+argx := 20
+argy := 20
+args := "game over"
+argk := 3
+drawstring
+
+endprgm

@@ -7,7 +7,7 @@ rm tigame/parser/*.class
 rm tigame/interp/*.class
 rm tigame/gui/*.class
 
-#javac -cp .:antlr-4.0-complete.jar tigame/parser/*.java
-#javac -cp .:antlr-4.0-complete.jar tigame/interp/*.java
-#javac -cp .:antlr-4.0-complete.jar tigame/gui/*.java
-#javac -cp .:antlr-4.0-complete.jar tigame/Run.java
+javac -cp .:antlr-4.0-complete.jar tigame/parser/*.java
+javac -cp .:antlr-4.0-complete.jar tigame/interp/*.java
+javac -cp .:antlr-4.0-complete.jar tigame/gui/*.java
+javac -cp .:antlr-4.0-complete.jar tigame/Run.java
