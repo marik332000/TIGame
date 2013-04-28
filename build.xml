@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<project name="tigame" default="jar" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+  <!-- Project-specific configuration -->
+  <property name="artifactId" value="tigame"/>
+  <property name="description" value="Retro game/emulator in style of TI-83+"/>
+  <property name="version" value="1.0"/>
+  <property name="package.main" value="${artifactId}"/>
+  <property name="main.class" value="${package.main}.Run"/>
+  <property name="base.name" value="${artifactId}-${version}"/>
+
+  <!-- Standard Directory Layout -->
+  <property name="src.dir" value="game"/>
+  <property name="build.dir" value="build"/>
+  <property name="dist.dir" value="dist"/>
+
+  <!-- Targets -->
+
+  <target name="resolve" description="Retrieve dependencies with Ivy.">
+    <ivy:resolve log="download-only"/>
+    <ivy:cachepath conf="default" pathid="runtime.classpath"/>
+    <ivy:cachefileset conf="default" setid="runtime.fileset"/>
+  </target>
+
+  <target name="compile" depends="resolve" description="Compile all sources.">
+    <mkdir dir="${dist.dir}"/>
+    <mkdir dir="${build.dir}/classes"/>
+    <javac srcdir="${src.dir}" destdir="${build.dir}/classes"
+           optimize="on" debug="on" deprecation="on" includeantruntime="no">
+      <compilerarg value="-Xlint"/>
+      <classpath refid="runtime.classpath"/>
+    </javac>
+    <copy todir="${build.dir}/classes">
+      <fileset dir="${src.dir}" excludes="**/*.java"/>
+    </copy>
+  </target>
+
+  <target name="jar" depends="compile"
+          description="Generate the jarfile distributable.">
+    <jar destfile="${dist.dir}/${base.name}.jar"
+         basedir="${build.dir}/classes">
+      <manifest>
+        <attribute name="Main-Class" value="${main.class}"/>
+      </manifest>
+    </jar>
+    <jar destfile="${dist.dir}/${base.name}-all.jar"
+         basedir="${build.dir}/classes">
+      <zipgroupfileset refid="runtime.fileset"/>
+      <manifest>
+        <attribute name="Main-Class" value="${main.class}"/>
+      </manifest>
+    </jar>
+  </target>
+
+  <target name="run" depends="compile" description="Run the application.">
+    <java classname="${main.class}" classpath="${build.dir}/classes" fork="yes"
+          dir="${build.dir}/classes">
+      <classpath refid="runtime.classpath"/>
+    </java>
+  </target>
+
+  <target name="clean" description="Delete all generated files.">
+    <delete dir="${build.dir}"/>
+    <delete dir="${dist.dir}"/>
+    <delete file="cache.properties"/>
+  </target>
+</project>

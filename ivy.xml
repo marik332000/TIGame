@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ivy-module version="2.0">
+  <info organisation="tigame" module="tigame"/>
+  <dependencies>
+    <dependency org="org.antlr" name="antlr4" rev="4.0" conf="default"/>
+  </dependencies>
+</ivy-module>
