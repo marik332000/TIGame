@@ -18,7 +18,7 @@ public class CharRender {
 		height= 5;
 		left_pad = 1;
 		try {
-			font = ImageIO.read(new File("font2.png"));
+			font = ImageIO.read(CharRender.class.getResource("font2.png"));
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
